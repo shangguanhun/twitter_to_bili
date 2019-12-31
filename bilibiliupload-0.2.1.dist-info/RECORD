@@ -1,0 +1,12 @@
+bilibiliupload-0.2.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+bilibiliupload-0.2.1.dist-info/LICENSE.md,sha256=D5GCIwb5HGrKbgRGsCxRpOkbpfESldDzu_CMtx6jGsA,1071
+bilibiliupload-0.2.1.dist-info/METADATA,sha256=gq4I0birRTIu9_cQNWprsBAXniyX8WhA1Qu_Iklz0v8,1641
+bilibiliupload-0.2.1.dist-info/RECORD,,
+bilibiliupload-0.2.1.dist-info/WHEEL,sha256=p46_5Uhzqz6AzeSosiOnxK-zmFja1i22CrQCjmYe8ec,92
+bilibiliupload-0.2.1.dist-info/top_level.txt,sha256=ATXz1IGpF306RaWyCDjKa-GuA9gMHmK06ViVHEGo7ao,15
+bilibiliupload/__init__.py,sha256=WWR85gk7b62AcsHyfng1MN1r-BZX-EfNatYDMEDQ3nU,47
+bilibiliupload/__pycache__/__init__.cpython-36.pyc,,
+bilibiliupload/__pycache__/bilibili.cpython-36.pyc,,
+bilibiliupload/__pycache__/requests.cpython-36.pyc,,
+bilibiliupload/bilibili.py,sha256=qGwLuUeAqz-Wvtjye8XFsyL_ptkIXAh5zbMvHV4PT7s,18103
+bilibiliupload/requests.py,sha256=FwheNgvK9E0xILI9RVhv2PgUagB_9QpLM1W_Pq4yJU8,22
