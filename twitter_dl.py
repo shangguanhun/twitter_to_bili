@@ -20,7 +20,7 @@ class TwitterDownloader:
 	video_api = 'https://api.twitter.com/1.1/videos/tweet/config/'
 	tweet_data = {}
 
-	def __init__(self, tweet_url, output_dir = './output', debug = 0):
+	def __init__(self, tweet_url, output_dir = '/tmp', debug = 0):
 		self.tweet_url = tweet_url
 		self.output_dir = output_dir
 		self.debug = debug

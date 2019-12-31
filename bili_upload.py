@@ -3,6 +3,7 @@ from twitter_dl import *
 import time
 from twitter_scraper import get_tweets
 import pymysql
+import os
 
 
 # MySql数据库账号信息,需要提前创建好数据库
@@ -41,7 +42,11 @@ cv_list ={'misawa_official':'三澤紗千香','azumi_waki':'和氣あず未','Ka
 'INFO_shikaco':'久保ユリカ','Riko_kohara':'小原莉子','aimi_sound':'爱美','ayasa_ito':'伊藤彩沙','AyakaOhashi':'大橋彩香',
 'toyotamoe':'豊田萌絵','_maeshima_ami':'前島亜美','InfoItomiku':'伊藤美来','marika_0222':'高野麻里佳','inoriminase':'水瀬いのり',
 's_toshitai_o':'佐倉としたい大西','mimori_suzuko':'三森すずこ','aya_uchida':'内田彩','naobou_official':'東山奈央',
-'tokui_sorangley':'徳井青空'}
+'tokui_sorangley':'徳井青空','eriii_musicinfo':'山崎エリイ','MachicoOfficial':'machico','ReinaUeda_Staff':'上田麗奈',
+'RiEmagic':'村川梨衣','miiiiiina_cat':'高橋未奈美','ErikoMatsui':'松井恵理子','mikakokomatsu':'小松未可子','hanazawa_staff':'花澤香菜',
+'satosatomi58':'佐藤聡美','nishiasuka':'西明日香','0812asumikana':'阿澄佳奈','hidaka_rina0615':'日高里菜','yukachiofficial':'井口裕香',
+'nanjolno':'南條愛乃','LiSA_OLiVE':'LiSA_OLiVE','Yaskiyo_manager':'安野希世乃','TomoyoKurosawa':'黒沢ともよ','suzaki_aya':'洲崎綾',
+'akekodao':'明坂聡美','rikachimalu':'長江里加','k_moeka_':'小泉萌香'}
 
 video_to_time_dict = {}
 video_to_id_dict = {}
@@ -49,7 +54,7 @@ cv_to_name_dict = {}
 
 def get_video_url(cv_url):
 	video_url_list = []
-	print(cv_url)
+	print('[+]cv ' + cv_url)
 
 	for tweet in get_tweets(cv_url, pages=1):
 		if tweet['likes'] >= 1000 and len(tweet['entries']['videos'])>0:
@@ -70,22 +75,26 @@ def get_video_list_by_cv():
 	return video_url_list
 
 def down_and_up_load(url):
-	print(url)
 	video = ''
 	try:
 		twitter_dl = TwitterDownloader(url)
 		video = twitter_dl.download()
+		print(video)
 	except:
 		print(url + 'is null')
 
-
 	if len(video) > 0 :
-		print('[+] upload')
+		print('[+] upload' + cv_to_name_dict[url])
 		b = Bilibili()
 		b.login(BiliUser,BiliPassword)
 		tags = ['声优']
 		tags.append(cv_to_name_dict[url])
-		b.upload(VideoPart(video, 'part_title', 'part_desc'),video_to_time_dict[url],152,tags,"本人立志于单推佐仓绫音（及其后宫团），该视频为机器人自动爬取霓虹女声优推特转发,如需二次创作，标明推特源即可。若喜欢的cv未被收录，私聊本号~",source=url)
+		b.upload(VideoPart(video, 'part_title', 'part_desc'),video_to_time_dict[url],152,tags,"立志于单推佐仓绫音（及其后宫团），该视频为机器人自动爬取霓虹女声优推特转发,如需二次创作，标明推特源即可。若喜欢的cv未被收录，私聊本号~项目位于https://github.com/shangguanhun/twitter_to_bili，自取",source=url)
+
+		path = video
+		if os.path.exists(path):  # 如果文件存在
+			os.remove(path)  
+			print('[+] remove ' + path)
 
 def upload_all_video():
 
@@ -95,7 +104,7 @@ def upload_all_video():
 		with g_connection.cursor() as cursor:
 			for voide_url in video_list:
 				sql = "SELECT * FROM twitter_data WHERE twitter_id = %s" % video_to_id_dict[voide_url]
-				print(sql)
+				#print(sql)
 				results = cursor.execute(sql)
 				if results == 0:
 					down_and_up_load(voide_url)
