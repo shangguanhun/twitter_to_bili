@@ -92,6 +92,7 @@ def down_and_up_load(url):
 def upload_all_video():
 
 	video_list = get_video_list_by_cv()
+	is_first = True
 	if len(video_list) > 0:
 		connect_mysql()
 		with g_connection.cursor() as cursor:
@@ -100,12 +101,15 @@ def upload_all_video():
 				#print(sql)
 				results = cursor.execute(sql)
 				if results == 0:
+					if not is_first :
+						time.sleep(30)#睡眠30s
+					is_first = False
+
 					down_and_up_load(voide_url)
 					sql = "INSERT IGNORE INTO twitter_data(twitter_id) VALUES (%s)" % (video_to_id_dict[voide_url])
 					print(sql)
 					cursor.execute(sql)
 					g_connection.commit()
-					time.sleep(30)#睡眠30s
 
 			g_connection.close()
 
