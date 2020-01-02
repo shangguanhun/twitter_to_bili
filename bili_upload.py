@@ -1,5 +1,3 @@
-from bilibiliupload import *
-from twitter_dl import *
 import time
 from twitter_scraper import get_tweets
 import pymysql
@@ -51,29 +49,25 @@ video_to_time_dict = {}
 video_to_id_dict = {}
 cv_to_name_dict = {}
 
-def get_video_url(cv_url):
+def get_video_list_by_cv():
 	video_url_list = []
-	print('[+]cv ' + cv_url)
-
-	for tweet in get_tweets(cv_url, pages=1):
-		if tweet['likes'] >= 1000 and len(tweet['entries']['videos'])>0:
+	for tweet in get_tweets(cv_list):
+		if len(tweet['entries']['videos'])>0:
+			cv_url = tweet['cv_url']
+			print('[+] 处理' + cv_url)
 			tw_url = twitter_url + cv_url + '/status/' + tweet['tweetId']
 			if(tw_url not in video_to_time_dict):
 				video_url_list.append(tw_url)
 				video_to_time_dict[tw_url] = cv_list[cv_url]  + str(tweet['time']) +' 转推 '
 				video_to_id_dict[tw_url] = tweet['tweetId']
 				cv_to_name_dict[tw_url] = cv_list[cv_url]
-	return video_url_list
-
-def get_video_list_by_cv():
-	video_url_list = []
-	for cv_url in cv_list:
-		temp_list = get_video_url(cv_url)
-		video_url_list = video_url_list + temp_list
 
 	return video_url_list
 
 def down_and_up_load(url):
+	from bilibiliupload import Bilibili
+	from bilibiliupload import VideoPart
+	import twitter_dl
 	video = ''
 	try:
 		twitter_dl = TwitterDownloader(url)
