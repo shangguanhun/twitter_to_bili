@@ -36,7 +36,7 @@ def get_tweets(user, pages=25):
                 tweetId = tweet.find(
                     '.js-permalink')[0].attrs['data-conversation-id']
                 time = datetime.fromtimestamp(
-                    int(tweet.find('._timestamp')[0].attrs['data-time-ms'])/1000.0)
+                    int(tweet.find('._timestamp')[0].attrs['data-time-ms'])/1000.0 + 8*60*60)#加8h使其显示cn时间
                 interactions = [x.text for x in tweet.find(
                     '.ProfileTweet-actionCount')]
                 replies = int(interactions[0].split(" ")[0].replace(comma, "").replace(dot,""))
