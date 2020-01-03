@@ -43,7 +43,7 @@ cv_list ={'misawa_official':'三澤紗千香','azumi_waki':'和氣あず未','Ka
 'tokui_sorangley':'徳井青空','MachicoOfficial':'machico','ReinaUeda_Staff':'上田麗奈','k_moeka_':'小泉萌香',
 'RiEmagic':'村川梨衣','hanazawa_staff':'花澤香菜','satosatomi58':'佐藤聡美','nishiasuka':'西明日香','0812asumikana':'阿澄佳奈',
 'hidaka_rina0615':'日高里菜','yukachiofficial':'井口裕香','nanjolno':'南條愛乃','LiSA_OLiVE':'LiSA','Yaskiyo_manager':'安野希世乃',
-'TomoyoKurosawa':'黒沢ともよ','suzaki_aya':'洲崎綾','akekodao':'明坂聡美','rikachimalu':'長江里加'}
+'TomoyoKurosawa':'黒沢ともよ','suzaki_aya':'洲崎綾','akekodao':'明坂聡美','rikachimalu':'長江里加','OSae1010':'大塚紗英'}
 
 video_to_time_dict = {}
 video_to_id_dict = {}
@@ -88,6 +88,8 @@ def down_and_up_load(url):
 		if os.path.exists(path):  # 如果文件存在
 			os.remove(path)  
 			print('[+] remove ' + path)
+		return True
+	return False
 
 def upload_all_video():
 
@@ -103,9 +105,9 @@ def upload_all_video():
 				if results == 0:
 					if not is_first :
 						time.sleep(30)#睡眠30s
-					is_first = False
-
-					down_and_up_load(voide_url)
+					success_up = down_and_up_load(voide_url)
+					if success_up :
+    						is_first = False
 					sql = "INSERT IGNORE INTO twitter_data(twitter_id) VALUES (%s)" % (video_to_id_dict[voide_url])
 					print(sql)
 					cursor.execute(sql)
@@ -116,5 +118,3 @@ def upload_all_video():
 #if __name__ == '__main__':	
 def main_handler(event, context):
 	upload_all_video()
-	
-	
