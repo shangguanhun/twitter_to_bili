@@ -71,7 +71,7 @@ def down_and_up_load(url):
 	import twitter_dl
 	video = ''
 	try:
-		twitter_dl = TwitterDownloader(url)
+		twitter_dl = twitter_dl.TwitterDownloader(url)
 		video = twitter_dl.download()
 		print(video)
 	except:
