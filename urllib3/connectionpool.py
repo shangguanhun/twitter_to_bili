@@ -425,17 +425,6 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
 
         # AppEngine doesn't have a version attr.
         http_version = getattr(conn, "_http_vsn_str", "HTTP/?")
-        log.debug(
-            '%s://%s:%s "%s %s %s" %s %s',
-            self.scheme,
-            self.host,
-            self.port,
-            method,
-            url,
-            http_version,
-            httplib_response.status,
-            httplib_response.length,
-        )
 
         try:
             assert_header_parsing(httplib_response.msg)
@@ -952,12 +941,6 @@ class HTTPSConnectionPool(HTTPConnectionPool):
         Return a fresh :class:`httplib.HTTPSConnection`.
         """
         self.num_connections += 1
-        log.debug(
-            "Starting new HTTPS connection (%d): %s:%s",
-            self.num_connections,
-            self.host,
-            self.port or "443",
-        )
 
         if not self.ConnectionCls or self.ConnectionCls is DummyConnection:
             raise SSLError(
