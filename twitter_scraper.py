@@ -24,6 +24,11 @@ def get_tweets(user_list):
             text = tweet.find('.tweet-text')[0].full_text
             tweetId = tweet.find(
                 '.js-permalink')[0].attrs['data-conversation-id']
+
+            href = tweet.find(
+                '.js-permalink')[0].attrs['href']
+            tweetFrom = href.split('/')[1]
+
             time = datetime.fromtimestamp(
                 int(tweet.find('._timestamp')[0].attrs['data-time-ms'])/1000.0 + 8*60*60)#加8h使其显示cn时间
             interactions = [x.text for x in tweet.find(
@@ -46,7 +51,7 @@ def get_tweets(user_list):
                         video_id = tmp[:tmp.index('.jpg')]
                         videos.append({'id': video_id})
             tweets.append({'tweetId': tweetId, 'time': time, 'text': text,'cv_url':cv_url,
-                            'replies': replies, 'retweets': retweets, 'likes': likes, 
+                            'replies': replies, 'retweets': retweets, 'likes': likes, 'isRetweet':tweetFrom == cv_url,
                             'entries': {
                                 'hashtags': hashtags, 'urls': urls,
                                 'photos': photos, 'videos': videos

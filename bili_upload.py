@@ -53,7 +53,8 @@ cv_to_name_dict = {}
 def get_video_list_by_cv():
 	video_url_list = []
 	for tweet in get_tweets(cv_list):
-		if len(tweet['entries']['videos'])>0:
+		#当且仅当非转推时才转发
+		if len(tweet['entries']['videos'])>0 and tweet['isRetweet']:
 			cv_url = tweet['cv_url']
 			print('[+] 处理' + cv_url)
 			tw_url = twitter_url + cv_url + '/status/' + tweet['tweetId']
