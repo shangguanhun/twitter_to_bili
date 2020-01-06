@@ -121,4 +121,11 @@ def upload_all_video():
 	
 #if __name__ == '__main__':	
 def main_handler(event, context):
+	global video_to_time_dict
+	video_to_time_dict = {}
+	global ideo_to_id_dict 
+	ideo_to_id_dict = {}
+	global cv_to_name_dict 
+	cv_to_name_dict= {}
+
 	upload_all_video()
