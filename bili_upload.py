@@ -76,7 +76,7 @@ def down_and_up_load(url):
 		video = twitter_dl.download()
 		print(video)
 	except:
-		print(url + 'is null')
+		print(url + '                                    is null')
 
 	if len(video) > 0 :
 		print('[+] upload' + cv_to_name_dict[url])
@@ -116,7 +116,9 @@ def upload_all_video():
 					g_connection.commit()
 
 			g_connection.close()
-
+	else:
+		print('未找到合适的video')
+	
 #if __name__ == '__main__':	
 def main_handler(event, context):
 	upload_all_video()
