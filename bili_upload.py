@@ -44,7 +44,8 @@ cv_list ={'misawa_official':'三澤紗千香','azumi_waki':'和氣あず未','Ka
 'RiEmagic':'村川梨衣','hanazawa_staff':'花澤香菜','satosatomi58':'佐藤聡美','nishiasuka':'西明日香','0812asumikana':'阿澄佳奈',
 'hidaka_rina0615':'日高里菜','yukachiofficial':'井口裕香','nanjolno':'南條愛乃','LiSA_OLiVE':'LiSA','Yaskiyo_manager':'安野希世乃',
 'TomoyoKurosawa':'黒沢ともよ','suzaki_aya':'洲崎綾','akekodao':'明坂聡美','rikachimalu':'長江里加','OSae1010':'大塚紗英',
-'tomori_kusunoki':'楠木ともり','minazou_373':'田中美海','kudoharuka910':'工藤晴香'}
+'tomori_kusunoki':'楠木ともり','minazou_373':'田中美海','kudoharuka910':'工藤晴香','aibaaiai':'相羽あいな','risa_tsumugi':'紡木吏佐',
+'Yuki_Nakashim':'中島由貴'}
 
 video_to_time_dict = {}
 video_to_id_dict = {}

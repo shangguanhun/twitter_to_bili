@@ -25,7 +25,6 @@ def get_tweets(user_list):
             if len(twwtext)>0:
                 text = twwtext[0].full_text
             else:
-                print('+++++++++++++++++++ error'  +cv_url)
                 continue
             tweetId = tweet.find(
                 '.js-permalink')[0].attrs['data-conversation-id']
